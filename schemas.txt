@@ -1,0 +1,59 @@
+MODEL
+
+# LISTINGS
+
+id: INT
+dealer INT (FOREIGN KEY [dealer])
+Title: STR
+type: rental
+price: INT
+Description: TEXT
+Location: STR
+Condition: STR
+Year: STR
+Make: STR
+Model: STR
+Capacity: STR
+Length: STR
+Horsepower: STR
+photo_main: STR
+photo_1: STR
+photo_2: STR
+photo_3: STR
+photo_4: STR
+photo_5: STR
+is_published: BOOL [true]
+list_date: DATE
+
+
+# DEALERS
+
+id: INT
+name: STR
+description: TEXT
+Photo: STR
+dob: DATE
+email
+phone
+address: TEXT
+CITY: STR
+STATE: STR
+ZIPCODE: STR
+is_sellet_of_the_month: BOOL [True]
+registered_date: DATE
+
+
+# CONTACT
+
+id: INT
+user_id: INT
+listing: INT
+listing_id
+NAME: STR
+phone: STR
+address: TEXT
+CITY: STR
+STATE: STR
+ZIPCODE: STR
+comments/questions: TEXT
+contact_date: DATE
