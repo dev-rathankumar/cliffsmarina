@@ -3063,7 +3063,7 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 2px 2px 3px -2px #152B3B;
   border-radius: 0.25rem; }
   .card > hr {
     margin-right: 0;
@@ -3375,11 +3375,11 @@ input[type="button"].btn-block {
 
 .badge-secondary {
   color: #212529;
-  background-color: #30caa0; }
+  background-color: #FEC608; }
   .badge-secondary[href]:hover, .badge-secondary[href]:focus {
     color: #212529;
     text-decoration: none;
-    background-color: #26a17f; }
+    background-color: #FEC608; }
 
 .badge-success {
   color: #fff;

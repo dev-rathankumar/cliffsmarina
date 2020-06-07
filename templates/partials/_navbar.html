@@ -13,7 +13,7 @@
       <ul class="navbar-nav">
         <li
           {% if '/' == request.path %}
-          class="nav-item active mr-3"
+          class="nav-item active mr-3 font-weight-bold theme-yellow"
           {% else %}
           class="nav-item mr-3"
           {% endif %}
@@ -22,7 +22,7 @@
         </li>
         <li
           {% if 'about' in request.path %}
-          class="nav-item active mr-3"
+          class="nav-item active mr-3 font-weight-bold theme-yellow"
           {% else %}
           class="nav-item mr-3"
           {% endif %}
@@ -30,8 +30,8 @@
           <a class="nav-link" href="{% url 'about' %}">About</a>
         </li>
         <li
-          {% if 'listings' in request.path %}
-          class="nav-item active mr-3"
+          {% if 'rentals' in request.path %}
+          class="nav-item active mr-3 font-weight-bold theme-yellow"
           {% else %}
           class="nav-item mr-3"
           {% endif %}
