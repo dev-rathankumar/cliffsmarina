@@ -14,7 +14,7 @@ class Dealer(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     zipcode = models.CharField(max_length=20)
-    is_sellet_of_the_month = models.BooleanField(default=False)
+    is_seller_of_the_month = models.BooleanField(default=False)
     registered_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

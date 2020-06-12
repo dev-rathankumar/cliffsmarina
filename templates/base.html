@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>Cliffs Marina Rentals</title>
 
   <!-- Font Awesome -->
@@ -16,7 +17,12 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <!-- Lightbox -->
 <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
 </head>
 <body>
   <!-- Top Bar -->

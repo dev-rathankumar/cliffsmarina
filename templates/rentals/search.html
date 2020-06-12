@@ -2,5 +2,184 @@
 
 
 {% block content %}
-<h1>Search</h1>
+{% load humanize %}
+<section id="showcase-inner" class="showcase-search text-white py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <form action="{% url 'search' %}">
+            {% csrf_token %}
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Keywords</label>
+                <input type="text" name="keywords" class="form-control" placeholder="Keyword (Boat, Yacht etc)" value="{{values.keywords}}">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">City</label>
+                <input type="text" name="city" class="form-control" placeholder="City" value="{{values.city}}">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">State</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">State (All)</option>
+                  {% for key, value in state_choices.items %}
+                    <option value="{{key}}"
+                      {% if key == values.state %}
+                        selected
+                      {% endif %}
+                    >{{value}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Years</label>
+                <select name="years" class="form-control">
+                  <option selected="true" disabled="disabled">Years (Any)</option>
+                  {% for key, value in year_choices.items %}
+                    <option value="{{key}}"
+                      {% if key == values.years %}
+                        selected
+                      {% endif %}
+                    >{{value}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <select name="price" class="form-control">
+                  <option selected="true" disabled="disabled">Price (All)</option>
+                  {% for key, value in price_choices.items %}
+                    <option value="{{key}}"
+                      {% if key == values.price %}
+                        selected
+                      {% endif %}
+                    >{{value}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'rentals' %}">Browse Rentals</a>
+          </li>
+          <li class="breadcrumb-item active"> Search Results</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+
+
+  <!-- Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+
+        <!-- Listing 1 -->
+
+        {% if rentals %}
+          {% for rental in rentals %}
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+            <a href="{% url 'rental' rental.id %}"><img class="card-img-top" src="{{rental.photo_main.url}}" alt="">
+              <div class="card-img-overlay">
+                <h2>
+                  <span class="badge badge-secondary theme-blue">${{rental.min_price | intcomma}} - ${{rental.max_price | intcomma}}</span>
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">{{rental.title}}</h4></a>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> {{rental.city}}, {{rental.location}}</p>
+                </div>
+                <hr>
+                <div class="row text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-th-large"></i> Capacity: {{rental.capacity}}</div>
+                  <div class="col-6">
+                    <i class="fas fa-calendar"></i> Year: {{rental.year}}</div>
+                </div>
+                <div class="row text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-cogs"></i> Make: {{rental.make}}</div>
+                  <div class="col-6">
+                    <i class="fas fa-atom"></i> Horsepower: {{rental.horsepower}}</div>
+                </div>
+                <hr>
+                <div class="row text-secondary">
+                  <div class="col-12">
+                    <i class="fas fa-user"></i> {{rental.dealer}}</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock"></i> {{rental.list_date | timesince}}</div>
+                </div>
+                <hr>
+                <a href="{% url 'rental' rental.id %}" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">No Rentals Available</div>
+        {% endif %}
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          {% if rentals.has_other_pages %}
+          <ul class="pagination">
+            {% if rentals.has_previous %}
+              <li class="page-item">
+                <a href="?page={{rentals.previous_page_number}}" class="page-link">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disable">
+                <a class="page-link">&laquo;</a>
+              </li>
+            {% endif %}
+            {% for i in rentals.paginator.page_range %}
+              {% if rentals.number == i %}
+                <li class="page-item active">
+                  <a class="page-link">{{i}}</a>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a href="?page={{i}}" class="page-link">{{i}}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if rentals.has_next %}
+              <li class="page-item">
+                <a href="?page={{rentals.next_page_number}}" class="page-link">&raquo;</a>
+              </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

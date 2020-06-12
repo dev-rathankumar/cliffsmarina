@@ -8,7 +8,7 @@
       <div class="row text-center">
         <div class="col-md-12">
           <h1 class="display-4">About Cliffs Marina</h1>
-          <p class="lead">The Cliffs Marina is owned and managed by VIP Marinas.</p>
+          <p class="lead">The Cliffs Marina is under the new ownership of VIP Marinas.</p>
         </div>
       </div>
     </div>
@@ -33,35 +33,54 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h2>We Search For The Perfect Home</h2>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
+          <h3>Welcome to The Cliffs Marina on Possum Kingdom Lake.</h3>
+          <p class="card-text">Welcome to the Cliffs Marina located on the stunning Possum Kingdom Lake.
+            Possum Kingdom Lake is well known for being one of the most gorgeous lakes in North Texas.
+            Whether you enjoy recreational boating or relaxing fishing,
+            Possum Kingdom Lake provides a relaxing atmosphere to engage in water activities.
+            While soaking up the crisp refreshing waters of Possum Kingdom Lake,
+            don’t overlook the towering cliffs that frame this beautiful body of water..</p>
           <img src="{% static 'img/about.jpg' %}" alt="">
-          <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-            neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-            commodi id libero eveniet harum perferendis laborum molestias quia.</p>
+          <p class="mt-4">The Cliffs Marina facilitates easy access to a full day of lake fun.
+            We offer annual leasing packages on our covered slips. Courtesy slips can
+            also be utilized on a per availability basis.</p>
+            <p class="mt-4">While on the lake make sure to restock and refuel at our ship store.
+              Inside our ship store you will find a wide variety of snacks and beverages,
+              as well as fishing tackle supplies, so you can load up on what you need
+              and quickly get back to having fun on the lake. Our gas stations are
+               conveniently accessible on land or at the courtesy dock.
+               Take advantage of our variety of watercraft rentals. Full or half-day watercraft
+               rentals are offered with pontoon boats, kayaks, stand-up paddle boards, beach cruiser
+               bicycles and many more. We genuinely hope you have an amazing time and take full advantage
+                of all the services we have to offer while you visit Possum Kingdom Lake.</p>
         </div>
+
+
         <div class="col-md-4">
+          {% for dealer in dealers %}
           <div class="card">
-            <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month">
+            <img class="card-img-top" src="{{dealer.photo.url}}" alt="Seller of the month" style="max-height: unset !important;">
             <div class="card-body">
               <h5 class="card-title">Seller Of The Month</h5>
-              <h6 class="text-secondary">Kyle Brown</h6>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nesciunt amet, illo itaque similique repellat.
-                content.
+              <h6 class="text-secondary">{{dealer.name}} <span style="float:right;"><i class="fa fa-map-marker" aria-hidden="true"></i> {{dealer.city}}</span></h6>
+              <p class="card-text">{{dealer.description}}
               </p>
             </div>
           </div>
+          <br>
+          {% endfor %}
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- Work -->
   <section id="work" class="bg-dark text-white text-center">
-    <h2 class="display-4">We Work For You</h2>
-    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
+    <h2 class="display-4">We Are Fun</h2>
+    <h4>We have everything you need to enjoy your time on Possum Kingdom Lake.</h4>
     <hr>
-    <a href="listings.html" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+    <a href="{% url 'rentals' %}" class="btn btn-secondary text-white btn-lg">View Our Latest Rentals</a>
   </section>
 
   <!-- Team -->
